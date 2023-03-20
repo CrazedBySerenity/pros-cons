@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Expense tracker</title>
 </head>
 <body>
-    <script src="expense-tracker.js"></script>
+
+    <h1>
+        Welcome<span id="welcome-text"> dear customer</span>. We appreciate you using our expense tracker
+    </h1>
+
+    <div>
+        <button onclick="menu(0)">
+            Set account name
+        </button>
+        <button onclick="menu(1)">
+            Add income
+        </button>
+        <button onclick="menu(2)">
+            Add expense
+        </button>
+        <button onclick="menu(3)">
+            Show account summary
+        </button>
+    </div>
+
+    <div>
+        <p id="explanation-text">
+
+        </p>
+    </div>
 
     <form id="form" onsubmit="return false">
         <input type="text" id="form-text">
@@ -16,5 +40,10 @@
             Confirm
         </button>
     </form>
+    <div id="summary">
+
+    </div>
+
+    <script src="expense-tracker.js"></script>
 </body>
 </html>

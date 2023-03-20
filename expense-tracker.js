@@ -1,9 +1,21 @@
 console.log("Hello");
 
-const UIaddIncome = {
-    explanationText: "Please type in the income amount you'd like to add",
+const minTextInput = 3;
 
-}
+let currentAction = 0;
+
+const setNameText = "Set a name";
+const addIncomeText = "Add an income";
+const addExpenseText = "Add an expense";
+const showSummaryText = "Here is your summary:";
+
+const textInput = document.getElementById("form-text");
+const numbersInput = document.getElementById("form-numbers");
+
+//0 = input name
+//1 = add income
+//2 = add expenses
+//3 = show all expenses
 
 const account = {
     holderName: "",
@@ -12,30 +24,77 @@ const account = {
     income: [],
     totalIncome: 0,
 
-    addExpenses(description, value) {
-        let newExpense = {description: description, value: value};
+    addExpenses(description, amount) {
+        let newExpense = {description: description, amount: amount};
         this.expenses.push(newExpense);
-    }
+    },
+
+    addIncome(description, amount) {
+        let newIncome = {description: description, amount: amount};
+        this.income.push(newIncome);
+    },
+
+    setName(newName){
+        this.holderName = newName;
+    },
 }
 
-function menu(){
+//Start by setting the default action to set name
+menu(0);
 
+function menu(newAction){
+    currentAction = newAction;
+    let explanationText;
+
+    document.getElementById("welcome-text").textContent = account.holderName;
+    switch(currentAction){
+        case 0:
+            explanationText = setNameText;
+            document.getElementById("welcome-text").textContent = " dear customer";
+            break;
+        case 1:
+            explanationText = addIncomeText;
+            break;
+        case 2:
+            explanationText = addExpenseText;
+            break;
+        case 3:
+            explanationText = showSummaryText;
+            break;
+    }
+    document.getElementById("explanation-text").textContent = explanationText;
 }
 
 function submitInput() {
-    numbers = document.getElementById("form-numbers").value;
-    text = document.getElementById("form-text").value;
+    numbers = numbersInput.value;
+    text = textInput.value;
 
     //Add more validation checks 
     if(text !== null && numbers != null){
-        if(text.length < 3) {
+        if(text.length < minTextInput) {
             console.log("Invalid input");
+            return;
         }
     
         else    {  
-            account.addExpenses(text, numbers);
+            //main logic here
 
-            account.expenses.forEach(element => console.log(element.description + " " + element.value));
+            switch(currentAction){
+                case 0:
+                    account.setName(text);
+                    document.getElementById("welcome-text").textContent = " " + account.holderName;
+                    break;
+                case 1:
+                    account.addIncome(text, numbers);
+                    break;
+                case 2:
+                    account.addExpenses(text, numbers);
+                    break;
+                case 3:
+                    account.expenses.forEach(element => console.log(element.description + " " + element.amount));
+                    break;
+            }
+
         }
     }
 
