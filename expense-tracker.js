@@ -21,6 +21,11 @@ const displayStyle = "inline-block";
 //2 = add expenses
 //3 = show all expenses
 
+const summaryElements = {
+    income: [],
+    expenses: [],
+}
+
 const account = {
     holderName: "",
     expenses: [
@@ -53,7 +58,8 @@ const account = {
         //Add a check for if the arrays are empty
 
         document.getElementById("total-balance").textContent = this.totalIncome - this.totalExpenses;
-        //Replace console output with the creation of new elements that display the description and amount
+        
+        //Add a check for if the correct element already exists before creating a new one
         for(i = 0; i < this.expenses.length; i++){
             console.log(`type: ${this.expenses[i].description} amount: ${this.expenses[i].amount}€`);
             
@@ -72,6 +78,9 @@ const account = {
             amountText.setAttribute("class", "amount__text");
             amountText.textContent = this.expenses[i].amount;
             newCard.appendChild(amountText);
+
+            summaryElements.expenses.push(newCard);
+            this.expenses.remove 
         }
         
         for(i = 0; i < this.income.length; i++){
@@ -144,10 +153,18 @@ function menu(newAction){
 function submitInput() {
     numbers = numbersInput.value;
     text = textInput.value;
-
-    //Add more validation checks 
+ 
+    //Validation check to make sure the input exists
     if(text != null && numbers != null){
-        if(text.length < minTextInput || !text || !numbers || isNaN(numbers)) {
+
+        //Validation checks for:
+        //The text input being shorter than the minimum allowed amount of characters
+        //The text field being missing
+        //The numbers field being missing (while required)
+        //The number not being a number (while required)
+        if(text.length < minTextInput || !text || !numbers && currentAction != 0 || isNaN(numbers) && currentAction != 0) {
+
+            //Outputting debbug into the console and preventing any further code in the function from being run
             console.log("Invalid input");
             return;
         }
