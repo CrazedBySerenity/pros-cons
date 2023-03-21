@@ -37,6 +37,11 @@ const account = {
     setName(newName){
         this.holderName = newName;
     },
+
+    showSummary(){
+        this.expenses.foreach(element => console.log(`type: ${element.description} amount: ${element.amount}€`));
+        this.income.foreach(element => console.log(`type: ${element.description} amount: ${element.amount}€`));
+    },
 }
 
 //Start by setting the default action to set name
@@ -46,7 +51,14 @@ function menu(newAction){
     currentAction = newAction;
     let explanationText;
 
-    document.getElementById("welcome-text").textContent = account.holderName;
+    if(account.holderName != ""){
+        document.getElementById("welcome-text").textContent = " " + account.holderName;
+    }
+
+    else {
+        document.getElementById("welcome-text").textContent = " dear customer";
+    }
+
     switch(currentAction){
         case 0:
             explanationText = setNameText;
@@ -60,6 +72,7 @@ function menu(newAction){
             break;
         case 3:
             explanationText = showSummaryText;
+            showSummary();
             break;
     }
     document.getElementById("explanation-text").textContent = explanationText;
@@ -70,7 +83,7 @@ function submitInput() {
     text = textInput.value;
 
     //Add more validation checks 
-    if(text !== null && numbers != null){
+    if(text != null && numbers != null){
         if(text.length < minTextInput) {
             console.log("Invalid input");
             return;
@@ -83,6 +96,7 @@ function submitInput() {
                 case 0:
                     account.setName(text);
                     document.getElementById("welcome-text").textContent = " " + account.holderName;
+                    document.getElementById("button-container").style.visibility = "visible";
                     break;
                 case 1:
                     account.addIncome(text, numbers);
