@@ -80,8 +80,10 @@ const account = {
             newCard.appendChild(amountText);
 
             summaryElements.expenses.push(newCard);
-            this.expenses.remove 
         }
+
+        //Quick solution to avoid creating duplicate elements for now
+        this.expenses.length = 0;
         
         for(i = 0; i < this.income.length; i++){
             console.log(`type: ${this.income[i].description} amount: ${this.income[i].amount}€`);
@@ -101,7 +103,12 @@ const account = {
             amountText.setAttribute("class", "amount__text");
             amountText.textContent = this.income[i].amount;
             newCard.appendChild(amountText);
+
+            summaryElements.income.push(newCard);
         }
+
+        //Quick solution to avoid creating duplicate elements for now
+        this.income.length = 0;
     },
 }
 
