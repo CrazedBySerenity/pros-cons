@@ -12,6 +12,9 @@ const showSummaryText = "Here is your summary:";
 const textInput = document.getElementById("form-text");
 const numbersInput = document.getElementById("form-numbers");
 const buttonInput = document.getElementById("form-btn");
+const summary = document.getElementById("summary");
+const explainer = document.getElementById("explanation-text");
+
 
 const displayStyle = "inline-block";
 
@@ -22,9 +25,16 @@ const displayStyle = "inline-block";
 
 const account = {
     holderName: "",
-    expenses: [],
+    expenses: [
+        {description: "gas", amount: 100},
+        {description: "food", amount: 243},
+        {description: "dog", amount: 889},
+    ],
     totalExpenses: 0,
-    income: [],
+    income: [
+        {description: "job", amount: 1000},
+        {description: "gift", amount: 52},
+    ],
     totalIncome: 0,
 
     addExpenses(description, amount) {
@@ -42,14 +52,48 @@ const account = {
     },
 
     showSummary(){
+        //Add a check for if the arrays are empty
 
+        document.getElementById("total-balance").textContent = this.totalIncome - this.totalExpenses;
         //Replace console output with the creation of new elements that display the description and amount
         for(i = 0; i < this.expenses.length; i++){
             console.log(`type: ${this.expenses[i].description} amount: ${this.expenses[i].amount}€`);
+            
+            let container = document.getElementById("expenses-container");
+
+            let newCard = document.createElement("div");
+            newCard.setAttribute("class", "summary__card");
+            container.appendChild(newCard);
+
+            let descText = document.createElement("p");
+            descText.setAttribute("class", "amount__text");
+            descText.textContent = this.expenses[i].description;
+            newCard.appendChild(descText);
+
+            let amountText = document.createElement("p");
+            amountText.setAttribute("class", "amount__text");
+            amountText.textContent = this.expenses[i].amount;
+            newCard.appendChild(amountText);
         }
         
         for(i = 0; i < this.income.length; i++){
             console.log(`type: ${this.income[i].description} amount: ${this.income[i].amount}€`);
+
+            let container = document.getElementById("income-container");
+
+            let newCard = document.createElement("div");
+            newCard.setAttribute("class", "summary__card");
+            container.appendChild(newCard);
+
+            let descText = document.createElement("p");
+            descText.setAttribute("class", "amount__text");
+            descText.textContent = this.income[i].description;
+            newCard.appendChild(descText);
+
+            let amountText = document.createElement("p");
+            amountText.setAttribute("class", "amount__text");
+            amountText.textContent = this.income[i].amount;
+            newCard.appendChild(amountText);
         }
     },
 }
@@ -64,6 +108,7 @@ function menu(newAction){
     textInput.style.display = "none";
     numbersInput.style.display = "none";
     buttonInput.style.display = "none";
+    summary.style.display = "none";
 
     if(account.holderName != ""){
         document.getElementById("welcome-text").textContent = " " + account.holderName;
@@ -95,9 +140,10 @@ function menu(newAction){
         case 3:
             explanationText = showSummaryText;
             account.showSummary();
+            summary.style.display = "flex";
             break;
     }
-    document.getElementById("explanation-text").textContent = explanationText;
+    explainer.textContent = explanationText;
 }
 
 function submitInput() {
@@ -118,6 +164,11 @@ function submitInput() {
                     account.setName(text);
                     document.getElementById("welcome-text").textContent = " " + account.holderName;
                     document.getElementById("button-container").style.visibility = "visible";
+                    textInput.style.display = "none";
+                    numbersInput.style.display = "none";
+                    buttonInput.style.display = "none";
+                    summary.style.display = "none";
+                    explainer.textContent = "Pick an option using the buttons";
                     break;
                 case 1:
                     account.addIncome(text, numbers);
@@ -129,7 +180,6 @@ function submitInput() {
                     break;
                 case 3:
                     account.expenses.forEach(element => console.log(element.description + " " + element.amount));
-                    
                     break;
             }
 
