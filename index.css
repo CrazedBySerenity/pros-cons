@@ -1,3 +1,33 @@
 #button-container {
     visibility: hidden;
 }
+
+#summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 100%;
+}
+
+.summary__list__container {
+    display: flex;
+    justify-content: center;
+}
+
+.summary__card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    min-width: 110px;
+
+    background-color: lightskyblue;
+
+    border-style: solid;
+    border-radius: 5%;
+    border-color: lightcoral;
+
+    margin: 5px;
+}
