@@ -1,5 +1,3 @@
-console.log("Hello");
-
 const minTextInput = 3;
 
 let currentAction = 0;
@@ -98,9 +96,6 @@ const account = {
     },
 }
 
-//Start by setting the default action to set name
-menu(0);
-
 function menu(newAction){
     currentAction = newAction;
     let explanationText;
@@ -152,11 +147,11 @@ function submitInput() {
 
     //Add more validation checks 
     if(text != null && numbers != null){
-        if(text.length < minTextInput) {
+        if(text.length < minTextInput || !text || !numbers || isNaN(numbers)) {
             console.log("Invalid input");
             return;
         }
-    
+
         else    {  
 
             switch(currentAction){
@@ -190,3 +185,5 @@ function submitInput() {
     form.reset();
 }
 
+//Start by setting the default action to set name
+menu(0);
