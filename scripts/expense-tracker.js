@@ -1,8 +1,9 @@
-const minTextInput = 3;
+const minTextInput = 1;
 
 let currentAction = 0;
+let currentExplainer = "";
 
-const setNameText = "Set a name";
+const setNameText = "Please set a name for your account";
 const addIncomeText = "Add an income";
 const addExpenseText = "Add an expense";
 const showSummaryText = "Here is your summary:";
@@ -12,7 +13,6 @@ const numbersInput = document.getElementById("form-numbers");
 const buttonInput = document.getElementById("form-btn");
 const summary = document.getElementById("summary");
 const explainer = document.getElementById("explanation-text");
-
 
 const displayStyle = "inline-block";
 
@@ -31,9 +31,9 @@ const account = {
     expenses: [
         {description: "gas", amount: 100},
         {description: "food", amount: 243},
-        {description: "dog", amount: 889},
+        {description: "dog", amount: 339},
     ],
-    totalExpenses: 1232,
+    totalExpenses: 732,
     income: [
         {description: "job", amount: 1000},
         {description: "gift", amount: 52},
@@ -154,6 +154,7 @@ function menu(newAction){
             summary.style.display = "flex";
             break;
     }
+    currentExplainer = explanationText;
     explainer.textContent = explanationText;
 }
 
@@ -168,10 +169,18 @@ function submitInput() {
         //The text input being shorter than the minimum allowed amount of characters
         //The text field being missing
         //The numbers field being missing (while required)
-        //The number not being a number (while required)
-        if(text.length < minTextInput || !text || !numbers && currentAction != 0 || isNaN(numbers) && currentAction != 0) {
+        //The numberS field not being a number (while required)
 
-            //Outputting debbug into the console and preventing any further code in the function from being run
+        if(!text || !numbers && currentAction != 0) {
+            explainer.textContent = currentExplainer + ", you cannot submit an empty input";
+            return;
+        }
+
+        else if(text.length < minTextInput || !text || !numbers && currentAction != 0) {
+            
+            //Add a real error message
+            //Make the error message contextual to the real error
+            //Outputting debug into the console and preventing any further code in the function from being run
             console.log("Invalid input");
             return;
         }
@@ -207,6 +216,10 @@ function submitInput() {
 
     let form = document.getElementById("form");
     form.reset();
+
+    if(currentAction != 0){
+        menu(currentAction);
+    }
 }
 
 //Start by setting the default action to set name
