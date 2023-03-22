@@ -40,10 +40,12 @@
 
     <form id="form" onsubmit="return false">
         <div>
-            <input type="text" id="form-text">
-            <input type="number" id="form-numbers">        
+            <!-- <label for="form-text">Transaction name:</label> -->
+            <input type="text" id="form-text" class="form__input" autofocus>
+            <!-- <label for="form-numbers">Transaction amount:</label> -->
+            <input type="number" id="form-numbers" class="form__input">        
         </div>
-        <button onclick="submitInput()" id="form-btn">
+        <button onclick="submitInput()" id="form-btn" class="btn__choice">
             Confirm
         </button>
     </form>

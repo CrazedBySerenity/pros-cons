@@ -66,7 +66,7 @@ const account = {
             let container = document.getElementById("expenses-container");
 
             let newCard = document.createElement("div");
-            newCard.setAttribute("class", "summary__card");
+            newCard.setAttribute("class", "summary__card summary__card--expenses");
             container.appendChild(newCard);
 
             let descText = document.createElement("p");
@@ -91,7 +91,7 @@ const account = {
             let container = document.getElementById("income-container");
 
             let newCard = document.createElement("div");
-            newCard.setAttribute("class", "summary__card");
+            newCard.setAttribute("class", "summary__card summary__card--income");
             container.appendChild(newCard);
 
             let descText = document.createElement("p");
