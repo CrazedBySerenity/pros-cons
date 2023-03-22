@@ -33,12 +33,12 @@ const account = {
         {description: "food", amount: 243},
         {description: "dog", amount: 889},
     ],
-    totalExpenses: 0,
+    totalExpenses: 1232,
     income: [
         {description: "job", amount: 1000},
         {description: "gift", amount: 52},
     ],
-    totalIncome: 0,
+    totalIncome: 1052,
 
     addExpenses(description, amount) {
         let newExpense = {description: description, amount: amount};

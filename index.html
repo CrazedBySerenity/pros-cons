@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <title>Expense tracker</title>
 </head>
 <body>
+    <div class="page-container">
+    <div class="main-header__container">
+        <h1 class="main-header">
+            Welcome<span id="welcome-text"> dear customer</span>!
+        </h1>
+    </div>
 
-    <h1>
-        Welcome<span id="welcome-text"> dear customer</span>. We appreciate you using our expense tracker
-    </h1>
 
     <div id="button-container">
-        <button onclick="menu(1)">
+        <button onclick="menu(1)" class="btn__choice">
             Add income
         </button>
-        <button onclick="menu(2)">
+        <button onclick="menu(2)" class="btn__choice">
             Add expense
         </button>
-        <button onclick="menu(3)">
+        <button onclick="menu(3)" class="btn__choice btn__summary">
             Show account summary
         </button>
     </div>
@@ -32,8 +39,10 @@
     </div>
 
     <form id="form" onsubmit="return false">
-        <input type="text" id="form-text" required>
-        <input type="number" id="form-numbers" required>
+        <div>
+            <input type="text" id="form-text" required>
+            <input type="number" id="form-numbers" required>        
+        </div>
         <button onclick="submitInput()" id="form-btn">
             Confirm
         </button>
@@ -55,7 +64,8 @@
             </div>
         </div>
     </div>
+    </div>
 
-    <script src="expense-tracker.js"></script>
+    <script src="scripts/expense-tracker.js"></script>
 </body>
 </html>
