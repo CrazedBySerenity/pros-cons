@@ -21,13 +21,13 @@
 
 
     <div id="button-container">
-        <button onclick="menu(1)" class="btn__choice">
+        <button id="income-btn" onclick="menu(1)" class="btn__choice btn__choice--left">
             Add income
         </button>
-        <button onclick="menu(2)" class="btn__choice">
+        <button id="expenses-btn" onclick="menu(2)" class="btn__choice btn__choice--right">
             Add expense
         </button>
-        <button onclick="menu(3)" class="btn__choice btn__summary">
+        <button id="summary-btn" onclick="menu(3)" class="btn__choice btn__summary">
             Show account summary
         </button>
     </div>
@@ -40,17 +40,24 @@
 
     <form id="form" onsubmit="return false">
         <div>
-            <!-- <label for="form-text">Transaction name:</label> -->
-            <input type="text" id="form-text" class="form__input" autofocus>
-            <!-- <label for="form-numbers">Transaction amount:</label> -->
-            <input type="number" id="form-numbers" class="form__input">        
+            <!--Add labels for the input-->
+
+            <div id="form-text-container" class="form__input__container">
+                <label for="form-text" id="form-text-label" class="form__input__label">Transaction name:</label>
+                <input type="text" id="form-text" class="form__input" autofocus>
+            </div>
+            <div id="form-numbers-container" class="form__input__container">
+                <label for="form-numbers" id="form-numbers-label" class="form__input__label">Transaction amount:</label>
+                <input type="number" id="form-numbers" class="form__input"> 
+            </div>
         </div>
-        <button onclick="submitInput()" id="form-btn" class="btn__choice">
+        <button onclick="submitInput()" id="form-btn" class="btn__choice btn__confirm">
             Confirm
         </button>
     </form>
     <div id="summary">
         <p class="summary__balance">Current balance: </p><h2 id="total-balance" class="summary__balance"></h2>
+        <div class="summary__divider"></div>
         <div class="summary__list__container">
             <div id="income-container" class="summary__list">
                 <h4 class="summary__header">
@@ -65,6 +72,7 @@
 
             </div>
         </div>
+        <div class="summary__divider"></div>
     </div>
     </div>
 
