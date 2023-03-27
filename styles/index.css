@@ -64,14 +64,18 @@ body {
 }
 
 .btn__choice:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 
     border-color: lightblue;
-    box-shadow: -4px 2px 2px black;
+    box-shadow: -2px 2px 2px black;
 }
 
 .btn__choice--left {
     border-radius: 15px 2px 2px 2px;
+}
+
+.btn__choice--left:hover {
+    box-shadow: 2px 2px 2px black;
 }
 
 .btn__choice--right {

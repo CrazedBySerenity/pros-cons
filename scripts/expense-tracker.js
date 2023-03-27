@@ -243,6 +243,7 @@ function submitInput() {
                     buttonInput.style.display = "none";
                     summary.style.display = "none";
                     explainer.textContent = "Pick an option using the buttons";
+                    explainer.style.color = "white";
                     break;
                 case 1:
                     account.addIncome(text, numbers);
