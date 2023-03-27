@@ -2,6 +2,7 @@ const minTextInput = 1;
 
 let currentAction = 0;
 let currentExplainer = "";
+let summaryIsEmpty = true;
 
 const setNameText = "Please set a name for your account";
 const addIncomeText = "Add an income";
@@ -15,6 +16,9 @@ const numbersLabel = document.getElementById("form-numbers-label")
 const buttonInput = document.getElementById("form-btn");
 const summary = document.getElementById("summary");
 const explainer = document.getElementById("explanation-text");
+const incomeButton = document.getElementById("income-btn");
+const expensesButton = document.getElementById("expenses-btn");
+const summaryButton = document.getElementById("summary-btn");
 
 const displayStyle = "inline-block";
 const errorColor = "darkred";
@@ -63,11 +67,10 @@ const account = {
         document.getElementById("total-balance").textContent = this.totalIncome - this.totalExpenses;
 
         //A check to make sure the arrays are not empty
-        if(this.expenses.length < 1 && this.income.length < 1){
+        if(this.expenses.length < 1 && this.income.length < 1 && summaryIsEmpty == true){
             console.log("No expenses or income added");
-            explainer.textContent = "You have not added any income or expenses yet";
             explainer.style.color = errorColor;
-            return
+            return("You have not added any income or expenses yet");
         }
 
         //Checking to see if the expenses array is empty, if not then create the elements to the display it's information
@@ -138,6 +141,8 @@ const account = {
             //Same as for expenses
             this.income.length = 0;
         }
+        summaryIsEmpty = false;
+        return(false);
     },
 }
 
@@ -153,6 +158,13 @@ function menu(newAction){
     buttonInput.style.display = "none";
     summary.style.display = "none";
     explainer.style.color = "white";
+
+    incomeButton.disabled = false;
+    expensesButton.disabled = false;
+    summaryButton.disabled = false;
+    incomeButton.style.pointerEvents = "auto";
+    expensesButton.style.pointerEvents = "auto";
+    summaryButton.style.pointerEvents = "auto";
 
     if(account.holderName != ""){
         document.getElementById("welcome-text").textContent = " " + account.holderName;
@@ -176,6 +188,9 @@ function menu(newAction){
             buttonInput.style.display = displayStyle;
             textLabel.style.display = displayStyle;
             numbersLabel.style.display = displayStyle;
+            //Disable button when the menu is active
+            incomeButton.style.pointerEvents = "none";
+            incomeButton.disabled = true;
             break;
         case 2:
             explanationText = addExpenseText;
@@ -184,11 +199,17 @@ function menu(newAction){
             buttonInput.style.display = displayStyle;
             textLabel.style.display = displayStyle;
             numbersLabel.style.display = displayStyle;
+            //Disable button when the menu is active
+            expensesButton.style.pointerEvents = "none";
+            expensesButton.disabled = true;
             break;
         case 3:
-            explanationText = showSummaryText;
-            account.showSummary();
+            explanationText = account.showSummary();
+            if(!explanationText) explanationText = showSummaryText;
             summary.style.display = "flex";
+            //Disable button when the menu is active
+            summaryButton.style.pointerEvents = "none";
+            summaryButton.disabled = true;
             break;
     }
     currentExplainer = explanationText;
