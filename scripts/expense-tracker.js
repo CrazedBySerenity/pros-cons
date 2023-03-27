@@ -31,6 +31,7 @@ const summaryElements = {
 
 const account = {
     holderName: "",
+    //Placeholder values to test the summary display without having to enter new incomes/expenses every time, the total expenses+incomes are also updated with the values already added
     expenses: [
         {description: "gas", amount: 100},
         {description: "food", amount: 243},
@@ -58,6 +59,10 @@ const account = {
     },
 
     showSummary(){
+
+        document.getElementById("total-balance").textContent = this.totalIncome - this.totalExpenses;
+
+        //A check to make sure the arrays are not empty
         if(this.expenses.length < 1 && this.income.length < 1){
             console.log("No expenses or income added");
             explainer.textContent = "You have not added any income or expenses yet";
@@ -65,68 +70,74 @@ const account = {
             return
         }
 
+        //Checking to see if the expenses array is empty, if not then create the elements to the display it's information
         if(this.expenses.length < 1){
             console.log("No expenses added");
-            return
         }
-
-        document.getElementById("total-balance").textContent = this.totalIncome - this.totalExpenses;
         
-        //Add a check for if the correct element already exists before creating a new one
-        for(i = 0; i < this.expenses.length; i++){
-            console.log(`type: ${this.expenses[i].description} amount: ${this.expenses[i].amount}€`);
-            
-            let container = document.getElementById("expenses-container");
+        //To-do: Add a check for if the correct element already exists before creating a new one
 
-            let newCard = document.createElement("div");
-            newCard.setAttribute("class", "summary__card summary__card--expenses");
-            container.appendChild(newCard);
+        else{
 
-            let descText = document.createElement("p");
-            descText.setAttribute("class", "amount__text");
-            descText.textContent = this.expenses[i].description;
-            newCard.appendChild(descText);
-
-            let amountText = document.createElement("p");
-            amountText.setAttribute("class", "amount__text");
-            amountText.textContent = this.expenses[i].amount;
-            newCard.appendChild(amountText);
-
-            summaryElements.expenses.push(newCard);
+            for(i = 0; i < this.expenses.length; i++){
+                console.log(`type: ${this.expenses[i].description} amount: ${this.expenses[i].amount}€`);
+                
+                let container = document.getElementById("expenses-container");
+    
+                let newCard = document.createElement("div");
+                newCard.setAttribute("class", "summary__card summary__card--expenses");
+                container.appendChild(newCard);
+    
+                let descText = document.createElement("p");
+                descText.setAttribute("class", "amount__text");
+                descText.textContent = this.expenses[i].description;
+                newCard.appendChild(descText);
+    
+                let amountText = document.createElement("p");
+                amountText.setAttribute("class", "amount__text");
+                amountText.textContent = this.expenses[i].amount;
+                newCard.appendChild(amountText);
+    
+                summaryElements.expenses.push(newCard);
+            }
+    
+            //Quick solution to avoid creating duplicate elements for now, the array is emptied and the elements created are not destroyed
+            this.expenses.length = 0;
         }
 
-        //Quick solution to avoid creating duplicate elements for now
-        this.expenses.length = 0;
 
+        //Same check as for expenses
         if(this.income.length < 1){
             console.log("No income added");
-            return
-        }
-        
-        for(i = 0; i < this.income.length; i++){
-            console.log(`type: ${this.income[i].description} amount: ${this.income[i].amount}€`);
-
-            let container = document.getElementById("income-container");
-
-            let newCard = document.createElement("div");
-            newCard.setAttribute("class", "summary__card summary__card--income");
-            container.appendChild(newCard);
-
-            let descText = document.createElement("p");
-            descText.setAttribute("class", "amount__text");
-            descText.textContent = this.income[i].description;
-            newCard.appendChild(descText);
-
-            let amountText = document.createElement("p");
-            amountText.setAttribute("class", "amount__text");
-            amountText.textContent = this.income[i].amount;
-            newCard.appendChild(amountText);
-
-            summaryElements.income.push(newCard);
         }
 
-        //Quick solution to avoid creating duplicate elements for now
-        this.income.length = 0;
+        else {
+
+            for(i = 0; i < this.income.length; i++){
+                console.log(`type: ${this.income[i].description} amount: ${this.income[i].amount}€`);
+    
+                let container = document.getElementById("income-container");
+    
+                let newCard = document.createElement("div");
+                newCard.setAttribute("class", "summary__card summary__card--income");
+                container.appendChild(newCard);
+    
+                let descText = document.createElement("p");
+                descText.setAttribute("class", "amount__text");
+                descText.textContent = this.income[i].description;
+                newCard.appendChild(descText);
+    
+                let amountText = document.createElement("p");
+                amountText.setAttribute("class", "amount__text");
+                amountText.textContent = this.income[i].amount;
+                newCard.appendChild(amountText);
+    
+                summaryElements.income.push(newCard);
+            }
+    
+            //Same as for expenses
+            this.income.length = 0;
+        }
     },
 }
 
@@ -134,6 +145,7 @@ function menu(newAction){
     currentAction = newAction;
     let explanationText;
 
+    //Hide all elements by default, so that they can later be displayed as needed
     textInput.style.display = "none";
     numbersInput.style.display = "none";
     textLabel.style.display = "none";
@@ -195,6 +207,8 @@ function submitInput() {
         //The text field being missing
         //The numbers field being missing (while required)
         //The numberS field not being a number (while required)
+        //
+        //If the input is invalid an error message is output into the console, the user is notified and the function does not execute any further code
 
         if(numbers < 1 && currentAction != 0){
             explainer.textContent = currentExplainer + ", your transaction amount cannot be less than zero";
@@ -211,10 +225,11 @@ function submitInput() {
         }
 
         else if(text.length < minTextInput || !text || !numbers && currentAction != 0) {
-            //Outputting debug into the console and preventing any further code in the function from being run
+            
             console.log("Invalid input");
             return;
         }
+
 
         else    {  
 
