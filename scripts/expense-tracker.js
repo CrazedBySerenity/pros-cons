@@ -3,6 +3,7 @@ const minTextInput = 1;
 let currentAction = 0;
 let currentExplainer = "";
 let summaryIsEmpty = true;
+let confirmationTextActive = false;
 
 const setNameText = "Please set a name for your account";
 const addIncomeText = "Add an income";
@@ -39,11 +40,11 @@ const account = {
     expenses: [
         {description: "gas", amount: 100},
         {description: "food", amount: 243},
-        {description: "dog", amount: 339},
+        {description: "insurance", amount: 339},
     ],
     totalExpenses: 682,
     income: [
-        {description: "job", amount: 1000},
+        {description: "salary", amount: 1000},
         {description: "gift", amount: 52},
     ],
     totalIncome: 1052,
@@ -171,13 +172,13 @@ function menu(newAction){
     }
 
     else {
-        document.getElementById("welcome-text").textContent = " dear customer";
+        document.getElementById("welcome-text").textContent = " dear user";
     }
 
     switch(currentAction){
         case 0:
             explanationText = setNameText;
-            document.getElementById("welcome-text").textContent = " dear customer";
+            document.getElementById("welcome-text").textContent = " dear user";
             textInput.style.display = displayStyle;
             buttonInput.style.display = displayStyle;
             break;
@@ -269,10 +270,14 @@ function submitInput() {
                 case 1:
                     account.addIncome(text, numbers);
                     account.totalIncome += parseInt(numbers);
+                    showTransactionConfirmation();
+                    setTimeout(showTransactionConfirmation, 1000);
                     break;
                 case 2:
                     account.addExpenses(text, numbers);
                     account.totalExpenses += parseInt(numbers);
+                    showTransactionConfirmation();
+                    setTimeout(showTransactionConfirmation, 1000);
                     break;
                 case 3:
                     account.expenses.forEach(element => console.log(element.description + " " + element.amount));
@@ -287,6 +292,20 @@ function submitInput() {
     if(currentAction != 0){
         menu(currentAction);
     }
+}
+
+function showTransactionConfirmation(){
+    confirmationText = document.getElementById("confirmation-text");
+
+    if(confirmationTextActive){
+        confirmationText.classList.remove("form__confirm__text--show");
+    }
+
+    if(!confirmationTextActive){
+        confirmationText.classList.add("form__confirm__text--show");
+    }
+
+    confirmationTextActive = !confirmationTextActive;
 }
 
 //Start by setting the default action to set name

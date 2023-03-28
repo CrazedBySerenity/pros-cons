@@ -54,6 +54,8 @@ body {
     border-width: 4px;
     border-radius: 0px 0px 15px 15px;
     border-color: rgb(178, 178, 178);
+
+
 }
 
 #button-container {
@@ -119,11 +121,14 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
 
-    font-size: 20px;
+    font-size: 18px;
 
     color: black;
 
     margin-bottom: 0px;
+
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 #form {
@@ -173,8 +178,14 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    
-    visibility: hidden;
+
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+}
+
+.form__confirm__text--show {
+    transition: opacity 0.02s;
+    opacity: 1;
 }
 
 #form-text-label {
