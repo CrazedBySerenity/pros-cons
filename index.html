@@ -13,48 +13,57 @@
 </head>
 <body>
     <div class="page-container">
-    <div class="main-header__container">
-        <h1 class="main-header">
-            Welcome<span id="welcome-text"> dear customer</span>!
-        </h1>
-    </div>
 
 
-    <div id="button-container">
-        <button id="income-btn" onclick="menu(1)" class="btn__choice btn__choice--left">
-            Add income
-        </button>
-        <button id="expenses-btn" onclick="menu(2)" class="btn__choice btn__choice--right">
-            Add expense
-        </button>
-        <button id="summary-btn" onclick="menu(3)" class="btn__choice btn__summary">
-            Show account summary
-        </button>
-    </div>
+    <div class="interactiveUI__container">
 
-    <div>
-        <p id="explanation-text">
-
-        </p>
-    </div>
-
-    <form id="form" onsubmit="return false">
-        <div>
-            <!--Add labels for the input-->
-
-            <div id="form-text-container" class="form__input__container">
-                <label for="form-text" id="form-text-label" class="form__input__label">Transaction name:</label>
-                <input type="text" id="form-text" class="form__input" autofocus>
-            </div>
-            <div id="form-numbers-container" class="form__input__container">
-                <label for="form-numbers" id="form-numbers-label" class="form__input__label">Transaction amount:</label>
-                <input type="number" id="form-numbers" class="form__input"> 
-            </div>
+        <div class="main-header__container">
+            <h1 class="main-header">
+                Welcome<span id="welcome-text"> dear customer</span>!
+            </h1>
         </div>
-        <button onclick="submitInput()" id="form-btn" class="btn__choice btn__confirm">
-            Confirm
-        </button>
-    </form>
+        <div id="button-container">
+            <button id="income-btn" onclick="menu(1)" class="btn__choice btn__choice--left">
+                Add income
+            </button>
+            <button id="expenses-btn" onclick="menu(2)" class="btn__choice btn__choice--right">
+                Add expense
+            </button>
+            <button id="summary-btn" onclick="menu(3)" class="btn__choice btn__summary">
+                Show account summary
+            </button>
+        </div>
+
+        <div>
+            <p id="explanation-text">
+
+            </p>
+        </div>
+
+        <form id="form" onsubmit="return false">
+            <div>
+                <!--Add labels for the input-->
+
+                <div id="form-text-container" class="form__input__container">
+                    <label for="form-text" id="form-text-label" class="form__input__label">Transaction name:</label>
+                    <input type="text" id="form-text" class="form__input" autofocus>
+                </div>
+                <div id="form-numbers-container" class="form__input__container">
+                    <label for="form-numbers" id="form-numbers-label" class="form__input__label">Transaction amount:</label>
+                    <input type="number" id="form-numbers" class="form__input"> 
+                </div>
+            </div>
+
+            <div class="form__lower__container">
+                <p class="form__confirm__text">
+                    Transaction added!
+                </p>
+                <button onclick="submitInput()" id="form-btn" class="btn__choice btn__confirm">
+                    Confirm
+                </button>
+            </div>
+        </form>
+    </div>
     <div id="summary">
         <p class="summary__balance">Current balance: </p><h2 id="total-balance" class="summary__balance"></h2>
         <div class="summary__divider"></div>

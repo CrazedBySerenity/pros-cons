@@ -157,7 +157,7 @@ function menu(newAction){
     numbersLabel.style.display = "none";
     buttonInput.style.display = "none";
     summary.style.display = "none";
-    explainer.style.color = "white";
+    explainer.style.color = "black";
 
     incomeButton.disabled = false;
     expensesButton.disabled = false;
@@ -258,13 +258,13 @@ function submitInput() {
                 case 0:
                     account.setName(text);
                     document.getElementById("welcome-text").textContent = " " + account.holderName;
-                    document.getElementById("button-container").style.visibility = "visible";
+                    document.getElementById("button-container").style.display = "grid";
                     textInput.style.display = "none";
                     numbersInput.style.display = "none";
                     buttonInput.style.display = "none";
                     summary.style.display = "none";
                     explainer.textContent = "Pick an option using the buttons";
-                    explainer.style.color = "white";
+                    explainer.style.color = "black";
                     break;
                 case 1:
                     account.addIncome(text, numbers);
