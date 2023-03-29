@@ -27,7 +27,7 @@ body {
     justify-content: center;
 
     color: white;
-    text-shadow: 1px 1px 2px #9EB25D;
+    text-shadow: 1px 1px 2px black;
 
     width: 100%;
 
@@ -89,8 +89,8 @@ body {
 .btn__choice:hover {
     transition: all 0.1s ease-in-out;
 
-    border-color: lightblue;
-    border-width: 4px;
+    /* border-color: lightblue;
+    border-width: 4px; */
     box-shadow: -2px 2px 2px black;
 }
 
@@ -101,7 +101,7 @@ body {
 
 .btn__choice--left:hover {
     box-shadow: 2px 2px 2px black;
-    border-color: plum;
+    /* border-color: plum; */
 }
 
 .btn__choice--right {
@@ -113,15 +113,25 @@ body {
     grid-area: 2/1/3/3;
 
     border-radius: 2px 2px 15px 15px;
+    border-color: black;
 
-    background-color: #9EB25D;
+    /* background-color: #9EB25D; */
+    background-color: white;
+}
+
+.btn__summary:hover {
+    border-width: 2px;
+    border-color: black;
+
+    box-shadow: 0px 1px 1px black;
 }
 
 #explanation-text {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
-
     font-size: 18px;
+
+    text-align: center;
 
     color: black;
 
@@ -129,6 +139,8 @@ body {
 
     margin-left: 8px;
     margin-right: 8px;
+
+    white-space: pre;
 }
 
 #form {
@@ -145,6 +157,13 @@ body {
 }
 
 .form__input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    
     width: 100%;
 
     border-style: solid;
@@ -270,10 +289,9 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
 
-    min-width: 110px;
-    width: 100%;
+    min-width: 200px;
 
     background-color: lightgreen;
 
